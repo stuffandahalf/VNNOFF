@@ -1,0 +1,20 @@
+vnnoff architecture
+(Very no nonsense object file format)
+
+header {
+    keyword/magic number
+    arch
+    os
+    address size (1 byte) in bytes
+    data location (4 byte)
+    
+}
+relocation_table {
+    address
+}
+symbol table {
+    address : visibility(1byte) : '\0' terminated symbol
+}
+data {
+    type (1byte) : size (1byte) : n * data
+}
