@@ -18,7 +18,7 @@ vnnoff_test: $(OBJS)
 	
 .PHONY: debug
 debug: vnnoff_test
-	valgrind $<
+	valgrind --leak-check=full ./$<
 	
 .PHONY: clean
 clean:
