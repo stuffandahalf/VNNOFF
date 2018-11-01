@@ -1,20 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "vnnoff.h"
-
-typedef symtab_entry(uint8_t) symtab_entryb;
-typedef symtab_entry(uint16_t) symtab_entryw;
 
 int main(int argc, char **argv)
 {
-	//symtab_entry(uint8_t) *symtab = malloc(sizeof(symtab_entry(uint8_t)));
-    /*symtab_entryb *symtab = malloc(sizeof(symtab_entryb));
+    struct vnnoff_hdr *header = malloc(sizeof(struct vnnoff_hdr));
+    header->magic[0] = 'V';
+    header->magic[1] = 'N';
+    header->magic[2] = 'N';
+    header->magic[3] = 'O';
+    header->magic[4] = 'F';
+    header->magic[5] = 'F';
+    //memcpy(&(header->magic), VNNOFF_MAGIC, sizeof(VNNOFF_MAGIC));
+    for (int i = 0; i < 6; i++) {
+        printf("%c", header->magic[i]);
+    }
+    puts("");
     
-    symtab->address = 0x5A;
-    printf("%ld\t%X\n", sizeof(*symtab), symtab->address);
-    printf("%ld\n", sizeof(char *));
     
-    free(symtab);*/
+    free(header);
     
 	return 0;
 }
