@@ -9,9 +9,6 @@ header {
     data location (4 byte)
     
 }
-relocation_table {
-    address
-}
 symbol table {
     address : visibility(1byte) : '\0' terminated symbol
 }

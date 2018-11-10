@@ -78,6 +78,12 @@ int main(int argc, char **argv)
     //header->symbol_table_location = sizeof(*header) + symtab->size;
     //data->
     
+    FILE *ofile = fopen("a.out", "w+");
+    
+    write_vnnoff(ofile, header, symtab, data_table);
+    
+    fclose(ofile);
+    
     free_data_table(data_table);
     free_symbol_table(symtab);
     free_header(header);

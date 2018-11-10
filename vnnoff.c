@@ -66,5 +66,5 @@ int vnnoff_datatab_add_entry(struct vnnoff_datatab *datatab, struct vnnoff_data_
 }
 
 void write_vnnoff(FILE *out_file, struct vnnoff_hdr *header, struct vnnoff_symtab *symtab, struct vnnoff_datatab *datatab) {
-    
+    fwrite((uint8_t *)header, sizeof(struct vnnoff_hdr), 1, out_file);
 }
