@@ -5,14 +5,14 @@
 #include <stdint.h>
 
 struct __attribute__((packed)) vnnoff_hdr {
-    uint8_t magic[6];
-    uint8_t arch;
-    uint8_t endianness;
-    uint8_t os;
-    uint8_t file_type;
-    uint8_t address_size;
-    size_t starting_address;
-    size_t symbol_table_location;
+    uint8_t magic[6];   // holds VNNOFF
+    uint8_t arch;       // the architecture, one of VNNOFF_ARCH
+    uint8_t endianness; // The endianness of the target
+    uint8_t os;         // The target operating system, one of VNNOFF_OS
+    uint8_t file_type;  // The type of the file, one of VNNOFF_FILE
+    uint8_t address_size;   // The number of bytes used to store an address
+    size_t starting_address;    // The address for the first instruction to be loaded
+    size_t symbol_table_location;   // The location of the symbol table into this file
 };
 
 /*#define symtab_entry(T) struct __attribute__((packed)) { T address; uint8_t visibility; char *symbol; }
@@ -23,27 +23,27 @@ typedef symtab_entry(uint32_t) symtab_entryl;
 typedef symtab_entry(uint64_t) symtab_entryq;*/
 
 struct __attribute__((packed)) vnnoff_symtab_entry {
-    uint8_t *address;
-    uint8_t visibility;
-    char *symbol;
+    uint8_t *address;       // The address of this symbol
+    uint8_t visibility;     // The visibility of this symbol
+    char *symbol;           // The name of the symbol
 };
 
 struct __attribute__((packed)) vnnoff_symtab {
-    struct vnnoff_symtab_entry **symbols;
-    size_t entries;
-    size_t max_size;
+    struct vnnoff_symtab_entry **symbols;   // The list of symbols
+    size_t entries;     // The number of symbols in the table
+    size_t max_size;    // The current max size of the table, used for memory reallocation
 };
 
 struct __attribute__((packed)) vnnoff_data_entry {
-    uint8_t type;
-    size_t size;
-    uint8_t *data;
+    uint8_t type;       // The type of data, one of VNNOFF_DATA
+    size_t size;        // The number of bytes used for this data
+    uint8_t *data;      // an array of bytes containing the data;
 };
 
 struct __attribute__((packed)) vnnoff_datatab {
-    struct vnnoff_data_entry **data;
-    size_t entries;
-    size_t max_size;
+    struct vnnoff_data_entry **data;    // The list of data entries
+    size_t entries;     // The number of entries in the list
+    size_t max_size;    // The max size of the table, used for memory reallocation
 };
 
 void vnnoff_header_init(struct vnnoff_hdr *header);

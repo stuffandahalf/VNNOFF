@@ -18,7 +18,7 @@ vnnoff_test: $(OBJS)
 	
 .PHONY: debug
 debug: vnnoff_test
-	valgrind --leak-check=full ./$<
+	valgrind --leak-check=full --track-origins=yes ./$<
 	
 .PHONY: clean
 clean:

@@ -46,6 +46,7 @@ int main(int argc, char **argv)
             FAIL("Failed to allocate new symbol");
         }
         if ((symtab_entry->address = calloc(header->address_size, sizeof(uint8_t))) == NULL) {
+            free_symbol(symtab_entry);
             free_symbol_table(symtab);
             free_header(header);
             FAIL("Failed to allocate new symbol nae");
@@ -58,7 +59,7 @@ int main(int argc, char **argv)
         str[0]++;
     }
     
-    struct vnnoff_datatab *data_table;
+    /*struct vnnoff_datatab *data_table;
     if ((data_table = malloc(sizeof(struct vnnoff_datatab))) == NULL) {
         free_symbol_table(symtab);
         free_header(header);
@@ -84,7 +85,7 @@ int main(int argc, char **argv)
     
     fclose(ofile);
     
-    free_data_table(data_table);
+    free_data_table(data_table);*/
     free_symbol_table(symtab);
     free_header(header);
     
@@ -113,6 +114,7 @@ void free_symbol_table(struct vnnoff_symtab *symtab) {
     for (size_t i = 0; i < symtab->entries; i++) {
         free_symbol(symtab->symbols[i]);
     }
+    free(symtab->symbols);
     free(symtab);
 }
 
