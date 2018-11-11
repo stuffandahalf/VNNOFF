@@ -62,7 +62,7 @@ int main(int argc, char **argv)
         str[0]++;
     }
     
-    /*struct vnnoff_datatab *data_table;
+    struct vnnoff_datatab *data_table;
     if ((data_table = malloc(sizeof(struct vnnoff_datatab))) == NULL) {
         free_symbol_table(symtab);
         free_header(header);
@@ -70,7 +70,7 @@ int main(int argc, char **argv)
     }
     vnnoff_datatab_init(data_table);
     
-    struct vnnoff_data_entry *data;
+    /*struct vnnoff_data_entry *data;
     if ((data = malloc(sizeof(struct vnnoff_data_entry))) == NULL) {
         free_data_table(data_table);
         free_symbol_table(symtab);
@@ -86,9 +86,9 @@ int main(int argc, char **argv)
     
     write_vnnoff(ofile, header, symtab, data_table);
     
-    fclose(ofile);
+    fclose(ofile);*/
     
-    free_data_table(data_table);*/
+    free_data_table(data_table);
     free_symbol_table(symtab);
     free_header(header);
     
@@ -131,6 +131,7 @@ void free_data_table(struct vnnoff_datatab *data_table) {
     for (size_t i = 0; i < data_table->entries; i++) {
         free_data_entry(data_table->data[i]);
     }
+    free(data_table->data);
     free(data_table);
 }
 
