@@ -56,6 +56,9 @@ int main(int argc, char **argv)
         symtab_entry->visibility = VNNOFF_VISIBILITY_LOCAL;
         symtab_entry->symbol = strclone(str);
         printf("%s\n", str);
+        
+        vnnoff_symtab_add_entry(symtab, symtab_entry);
+        
         str[0]++;
     }
     
@@ -120,6 +123,7 @@ void free_symbol_table(struct vnnoff_symtab *symtab) {
 
 void free_symbol(struct vnnoff_symtab_entry *symbol) {
     free(symbol->symbol);
+    free(symbol->address);
     free(symbol);
 }
 
